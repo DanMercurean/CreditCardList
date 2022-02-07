@@ -8,11 +8,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CreditCardListComponent } from './credit-card-list/credit-card-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { DialogAddCardComponent } from './dialog-add-card/dialog-add-card.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreditCardListComponent
+    CreditCardListComponent,
+    DialogAddCardComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +26,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatToolbarModule,
     MatTableModule,
     MatButtonModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
     HttpClientModule
   ],
   providers: [],
