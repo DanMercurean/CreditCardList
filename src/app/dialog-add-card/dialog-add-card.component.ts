@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxPaymentCardModule } from 'ngx-payment-card'; 
+
 
 @Component({
   selector: 'app-dialog-add-card',

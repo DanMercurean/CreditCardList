@@ -10,7 +10,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogAddCardComponent } from './dialog-add-card/dialog-add-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaymentCardModule } from 'ngx-payment-card';
+
 
 
 
@@ -28,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     MatButtonModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaymentCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
