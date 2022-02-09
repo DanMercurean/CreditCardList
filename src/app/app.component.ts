@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Token } from '@angular/compiler';
-import { Token } from '@angular/compiler/src/ml_parser/tokens';
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 export interface token {
   accessToken: string
@@ -16,44 +14,46 @@ export interface token {
 })
 export class AppComponent implements OnInit {
   title = 'CreditCardList';
-  token: Token
-  // {"username": "dan", "password": "LAE2xIA2avaeor768enivaR3783583VAeVaea7ioaF" }
-  // {"username": "dan", "password": "LAE2xIA2avaeor768enivaR3783583VAeVaea7ioaF" }
-  | undefined
+  credentials = { username: "dan", token: "LAE2xIA2avaeor768enivaR3783583VAeVaea7ioaF" };
+  token!: any;
+  creditCards: any;
 
-  // {"username": "dan", "password": "LAE2xIA2avaeor768enivaR3783583VAeVaea7ioaF" }
+  constructor(private http: HttpClient) {}
 
-  // {"username": "dan", "password": "LAE2xIA2avaeor768enivaR3783583VAeVaea7ioaF" }
-  constructor(private http: HttpClient, token: Token) {
-    token: Token
+  async ngOnInit(): Promise<void> {
+    await this.getTocken();
+    await this.getCreditCards();
   }
-  ngOnInit(): void {
-    this.http.post('https://credit-card-list.application.riecken.io/login', { username: "dan", token: "LAE2xIA2avaeor768enivaR3783583VAeVaea7ioaF" })
-      .subscribe(
-        {
-          next: (token ) => {
-            console.log(token)
-            this.getCreditCards(token)
-          },
-          error: (error) => { console.error(error) },
-          complete: () => { console.warn("OBSERVER COMPLETE") }
+ 
+  async getTocken(){
+    try {
+        let local = localStorage.getItem('token');
+        if (local) {
+          this.token = JSON.parse(local);
+        } else {
+          const response$ = this.http.post(
+          'https://credit-card-list.application.riecken.io/login', this.credentials
+          );
+          this.token = await lastValueFrom(response$);
+          localStorage.setItem('token', JSON.stringify(this.token));
         }
-      )
+    } catch (error) {
+      console.error(error);
+    }
   }
-  getCreditCards(token) {
+    async getCreditCards() {
 
-    const header = new HttpHeaders({
-      'Content-Type': 'applicatun/json',
-      Authorization: `Bearer ${token}`
-    })
-    console.log(token.parts, token.sourceSpan), token.type;
-
-    token.toLocaleString()
-    this.http.get('https://credit-card-list.application.riecken.io/credit-card', { headers: header }).subscribe(
-      (resp => console.log(resp)
-      )
-
-    )
-
+      const header = new HttpHeaders({
+        'Content Type': 'application/json',
+        'Authorization': 'Bearer ${this.token.accesToken}'
+      });
+      try{
+        const response$ = this.http.get('https://credit-card-list.application.riecken.io/credit-cards', {headers: header});
+        this.creditCards = await lastValueFrom(response$);
+        console.log(this.credentials);
+      } catch (error) {
+        console.log(error);
+      }
+      }
   }
-}
+  
