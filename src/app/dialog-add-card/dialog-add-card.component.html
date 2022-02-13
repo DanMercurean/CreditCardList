@@ -1,7 +1,34 @@
 <div style="width: 50vw; height:30vw">
-    <ngx-payment-card></ngx-payment-card>
+  <ngx-payment-card></ngx-payment-card>
 </div>
-
+<div>
+  <div>
+    <mat-form-field class="mr-16" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Please enter the name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Credit Card Number</mat-label>
+      <input matInput placeholder="Please enter the credit card number">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="mr-16" appearance="outline">
+      <mat-label>Expire Date</mat-label>
+      <input matInput [matDatepicker]="dp" [formControl]="date" placeholder="Please enter the expire date">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp color="primary" 
+            startView="multi-year" 
+            (yearSelected)="chosenYearHandler($event)"
+            (monthSelected)="chosenMonthHandler($event, dp)">
+          </mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>CVV</mat-label>
+      <input matInput placeholder="Please enter the security number">
+    </mat-form-field>
+  </div>
+</div>
 <!-- <ngx-payment-card #ngxPaymentCard
   [IBAN]="iban?.value"
   [cardNumber]="cNumber?.value"
