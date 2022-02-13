@@ -16,11 +16,7 @@ export interface cards {
 }
 
 const ELEMENT_DATA: cards[] = [
-  { id: '1', owner: 'Dan', number: 1000.0079, cvv: 266, expiration: '31.02.2022' },
-  { id: '2', owner: 'Dan', number: 1000.0079, cvv: 266, expiration: '31.02.2022' },
-  { id: '3', owner: 'Dan', number: 1000.0079, cvv: 266, expiration: '31.02.2022' },
-  { id: '4', owner: 'Dan', number: 1000.0079, cvv: 266, expiration: '31.02.2022' },
-  { id: '5', owner: 'Dan', number: 1000.0079, cvv: 266, expiration: '31.02.2022' }
+  { id: '1', owner: 'Dan', number: 1000.0079, cvv: 266, expiration: '31.02.2022' }
 ];
 
 @Component({
